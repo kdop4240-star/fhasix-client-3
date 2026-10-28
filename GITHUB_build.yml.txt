@@ -1,0 +1,71 @@
+name: Build
+
+# Compiles the mod on GitHub and uploads the finished .jar.
+# Runs on every push, every pull request, and by hand (Actions tab > Build > Run workflow).
+on:
+  push:
+  pull_request:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+env:
+  # Loom 1.14 needs Gradle 9. Change this one line if Gradle ever complains about the version.
+  GRADLE_VERSION: "9.2.1"
+
+jobs:
+  build:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 60
+
+    steps:
+      - name: Check out the code
+        uses: actions/checkout@v4
+
+      - name: Set up Java 21 (Minecraft 1.21.11 needs Java 21)
+        uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: 21
+
+      - name: Set up Gradle
+        uses: gradle/actions/setup-gradle@v4
+        with:
+          gradle-version: ${{ env.GRADLE_VERSION }}
+
+      - name: Build the mod
+        shell: bash
+        run: |
+          # use the project's gradlew if it has one, otherwise the Gradle installed above
+          if [ -f ./gradlew ]; then
+            chmod +x ./gradlew
+            GRADLE=./gradlew
+          else
+            GRADLE=gradle
+          fi
+          $GRADLE build --stacktrace --no-daemon -Dorg.gradle.jvmargs="-Xmx3g -Dfile.encoding=UTF-8"
+
+      - name: Show the built files
+        if: success()
+        run: ls -la build/libs
+
+      - name: Upload the mod .jar
+        if: success()
+        uses: actions/upload-artifact@v4
+        with:
+          name: fhasix-ui-theme
+          path: |
+            build/libs/*.jar
+            !build/libs/*-sources.jar
+          if-no-files-found: error
+
+      - name: Upload the build reports (only when the build failed)
+        if: failure()
+        uses: actions/upload-artifact@v4
+        with:
+          name: build-reports
+          path: |
+            build/reports/**
+            build/tmp/**/*.txt
+          if-no-files-found: ignore

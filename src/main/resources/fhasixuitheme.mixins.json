@@ -1,0 +1,32 @@
+{
+  "required": true,
+  "minVersion": "0.8",
+  "package": "com.fhasix.uitheme.mixin",
+  "compatibilityLevel": "JAVA_21",
+  "client": [
+    "f6",
+    "loading",
+    "cape",
+    "skin",
+    "NewCameraMixin",
+    "NewLookMixin",
+    "NewCrashMixin",
+    "NewHandMixin",
+    "NewItemStateMixin",
+    "NewItemEntityMixin",
+    "NewFogMixin",
+    "HandledScreenAccessor",
+    "SimpleOptionAccessor",
+    "NewSetScreenMixin",
+    "NewWindowMixin",
+    "NewPackListMixin",
+    "NewParticleMixin",
+    "NewEntityCullMixin",
+    "NewChunkDataMixin",
+    "NewOwnNameTagMixin",
+    "RenderLayersAccessor"
+  ],
+  "injectors": {
+    "defaultRequire": 1
+  }
+}

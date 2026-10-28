@@ -1,0 +1,11 @@
+{
+  "providers": [
+    {
+      "type": "bitmap",
+      "file": "fhasixuitheme:font/fhasix_f.png",
+      "ascent": 8,
+      "height": 9,
+      "chars": ["\ue9a1"]
+    }
+  ]
+}

@@ -1,0 +1,6 @@
+Default Dark Mode - resource pack by nebulr (nebuIr)
+https://modrinth.com/resourcepack/default-dark-mode
+https://github.com/nebuIr/Default-Dark-Mode
+License: Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International (see LICENSE.txt).
+Bundled unchanged inside the Fhasix mod: only the "minecraft" assets of the pack are included; the
+folders for other mods were left out.
